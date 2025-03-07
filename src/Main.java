@@ -105,12 +105,37 @@ public class Main {
     }
 
     private static void searchNotes() {
+        System.out.print("Search by 'title', 'content', or 'both'?: ");
+        String criteria = scanner.nextLine().trim().toLowerCase();
         System.out.print("Enter keyword: ");
         String keyword = scanner.nextLine().toLowerCase();
+
+        List<Note> foundNotes = new ArrayList<>();
         for (Note note : notes) {
-            if (note.getTitle().toLowerCase().contains(keyword) || note.getContent().toLowerCase().contains(keyword)) {
-                System.out.println(note);
+            boolean match = false;
+            switch (criteria) {
+                case "title":
+                    match = note.getTitle().toLowerCase().contains(keyword);
+                    break;
+                case "content":
+                    match = note.getContent().toLowerCase().contains(keyword);
+                    break;
+                case "both":
+                    match = note.getTitle().toLowerCase().contains(keyword) || note.getContent().toLowerCase().contains(keyword);
+                    break;
+                default:
+                    System.out.println("Invalid criteria. Searching in both fields.");
+                    match = note.getTitle().toLowerCase().contains(keyword) || note.getContent().toLowerCase().contains(keyword);
+                    break;
             }
+            if (match) foundNotes.add(note);
+        }
+
+        if (foundNotes.isEmpty()) {
+            System.out.println("No notes found.");
+        } else {
+            System.out.println("Search results:");
+            foundNotes.forEach(System.out::println);
         }
     }
 
