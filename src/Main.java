@@ -115,7 +115,23 @@ public class Main {
     }
 
     private static void sortNotes() {
-        notes.sort(Comparator.comparing(Note::getCreatedAt));
-        System.out.println("Notes sorted by date.");
+        System.out.print("Sort by 'date' or 'title'?: ");
+        String criteria = scanner.nextLine().trim().toLowerCase();
+
+        switch (criteria) {
+            case "date":
+                notes.sort(Comparator.comparing(Note::getCreatedAt));
+                break;
+            case "title":
+                notes.sort(Comparator.comparing(Note::getTitle, String.CASE_INSENSITIVE_ORDER));
+                break;
+            default:
+                System.out.println("Invalid criteria. Sorting by date.");
+                notes.sort(Comparator.comparing(Note::getCreatedAt));
+                break;
+        }
+
+        System.out.println("Notes sorted by " + criteria + ":");
+        readNotes();
     }
 }
