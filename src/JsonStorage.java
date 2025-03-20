@@ -3,7 +3,6 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.*;
 
 public class JsonStorage {
     private static final String STORAGE_FILE = "storagejson.json"; // Новое название файла
