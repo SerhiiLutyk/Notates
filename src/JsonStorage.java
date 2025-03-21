@@ -8,7 +8,7 @@ public class JsonStorage {
     private static final String STORAGE_FILE = "storagejson.json"; // Новое название файла
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    static void writeToFile() {
+    public static void writeToFile() {
         try(Writer writer = new FileWriter(STORAGE_FILE))
         {
             gson.toJson(STORAGE_FILE, writer);
